@@ -2,10 +2,25 @@
   <div>
     <h1>Edit Blog</h1>
     <form v-on:submit.prevent = "editBlog">
-      <p>title: <input type="text" v-model="blog.title"></p>
-      <p>content: <input type="text" v-model="blog.content"></p>
-      <p>category: <input type="text" v-model="blog.category"></p>
-      <p>status: <input type="text" v-model="blog.status"></p>
+      <div class="mb-3">
+        <label class="form-label">Title:</label>
+        <input type="text" v-model="blog.title" class="form-control" placeholder="Enter blog title">
+      </div>
+      
+      <div class="mb-3 editor-wrapper">
+        <label class="form-label">Content:</label>
+        <ckeditor :editor="editor" v-model="blog.content" :config="editorConfig"></ckeditor>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Category:</label>
+        <input type="text" v-model="blog.category" class="form-control">
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Status:</label>
+        <input type="text" v-model="blog.status" class="form-control">
+      </div>
       <p>
         <button type="submit">update blog</button>
         <button v-on:click="navigateTo('/blogs')">กลับ</button>
@@ -16,10 +31,17 @@
 
 <script>
 import BlogsService from '../../services/BlogsService'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
   data () {
     return {
+      editor: ClassicEditor,  // 1. กำหนด Editor Build
+      editorConfig: {
+        licenseKey: 'GPL',
+        // สามารถปรับแต่ง Toolbar ได้ตามต้องการ
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ] // 2. ตั้งค่า Toolbar
+      },
       blog: {
         title: '',
         thumbnail: 'null',

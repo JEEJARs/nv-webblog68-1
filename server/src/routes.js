@@ -2,8 +2,8 @@ const isAuthenController = require('./controllers/isAuthenController')
 const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 const BlogController = require('./controllers/BlogController')
-// const UploadController = require('./controllers/UploadController')
-// const fileUploadMiddleware = require('./middleware/fileUpload') // Import Middleware
+const UploadController = require('./controllers/UploadController')
+const fileUploadMiddleware = require('./middleware/fileUpload') // Import Middleware
 
 module.exports = (app) => {
   // เส้นทางเดิมจากบทที่ 4 (ถ้าอยากเก็บไว้)
@@ -34,5 +34,5 @@ module.exports = (app) => {
   
   // Route สำหรับ Upload โดยเฉพาะ
   // logic: เรียก middleware ก่อน -> ถ้าผ่าน -> เรียก controller
-  // app.post('/upload', fileUploadMiddleware, UploadController.upload)
+  app.post('/upload', fileUploadMiddleware, UploadController.upload)
 }
