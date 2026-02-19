@@ -45,6 +45,7 @@ export default {
     navigateTo (route) {
       this.$router.push(route) // สั่งเปลี่ยนหน้าด้วย Vue Router [5]
     },
+    
     async deleteBlog (blog) {
       let result = confirm("Want to delete?")
       if (result) {
