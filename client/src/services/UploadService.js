@@ -8,5 +8,8 @@ export default {
         'Content-Type': 'multipart/form-data'
       }
     })
+  },
+  delete (filename) {
+    return Api().post('upload/delete', { filename: filename })
   }
 }
